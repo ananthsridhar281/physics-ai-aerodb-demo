@@ -1,23 +1,11 @@
 import React, { useMemo } from 'react'
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
-  BarChart, Bar, LineChart, Line, ResponsiveContainer, Legend, Cell as RCell,
+  BarChart, Bar, ResponsiveContainer,
 } from 'recharts'
 import { generateLHSCases, seededRandom } from '../data/generateLHS'
 
-const MACH_COLORS: Record<string, string> = {
-  subsonic: '#0891B2',
-  transonic: '#D97706',
-  supersonic: '#EA580C',
-  hypersonic: '#DC2626',
-}
-
-function getMachRegime(mach: number) {
-  if (mach < 0.8) return 'subsonic'
-  if (mach < 1.4) return 'transonic'
-  if (mach < 3.0) return 'supersonic'
-  return 'hypersonic'
-}
+const SCATTER_COLOR = '#2563EB'
 
 function normalSample(rng: () => number, mu: number, sigma: number) {
   const u1 = Math.max(rng(), 1e-10)
@@ -90,7 +78,6 @@ export default function Cell3Visualization({ cellState, onRunComplete }: { cellS
     alpha: c.alpha_deg,
     elevon: c.elevon_L_deg,
     alt: c.altitude_km,
-    regime: getMachRegime(c.mach),
   })), [sample200])
 
   if (cellState === 'idle') return null
@@ -111,9 +98,7 @@ export default function Cell3Visualization({ cellState, onRunComplete }: { cellS
                 <XAxis dataKey="mach" name="Mach" tick={{ fontSize: 10, fill: '#94A3B8' }} label={{ value: 'Mach', position: 'insideBottom', offset: -3, fontSize: 10, fill: '#94A3B8' }} />
                 <YAxis dataKey="alpha" name="α" tick={{ fontSize: 10, fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ fontSize: 11, border: '1px solid #E2E8F0' }} />
-                <Scatter data={scatterPoints} isAnimationActive={false}>
-                  {scatterPoints.map((p, i) => <RCell key={i} fill={MACH_COLORS[p.regime]} fillOpacity={0.6} />)}
-                </Scatter>
+                <Scatter data={scatterPoints} fill={SCATTER_COLOR} fillOpacity={0.55} isAnimationActive={false} />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
@@ -125,9 +110,7 @@ export default function Cell3Visualization({ cellState, onRunComplete }: { cellS
                 <XAxis dataKey="mach" name="Mach" tick={{ fontSize: 10, fill: '#94A3B8' }} label={{ value: 'Mach', position: 'insideBottom', offset: -3, fontSize: 10, fill: '#94A3B8' }} />
                 <YAxis dataKey="elevon" name="Elevon_L" tick={{ fontSize: 10, fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ fontSize: 11, border: '1px solid #E2E8F0' }} />
-                <Scatter data={scatterPoints} isAnimationActive={false}>
-                  {scatterPoints.map((p, i) => <RCell key={i} fill={MACH_COLORS[p.regime]} fillOpacity={0.6} />)}
-                </Scatter>
+                <Scatter data={scatterPoints} fill={SCATTER_COLOR} fillOpacity={0.55} isAnimationActive={false} />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
@@ -139,20 +122,10 @@ export default function Cell3Visualization({ cellState, onRunComplete }: { cellS
                 <XAxis dataKey="alpha" name="α" tick={{ fontSize: 10, fill: '#94A3B8' }} label={{ value: 'α (deg)', position: 'insideBottom', offset: -3, fontSize: 10, fill: '#94A3B8' }} />
                 <YAxis dataKey="alt" name="Alt" tick={{ fontSize: 10, fill: '#94A3B8' }} />
                 <Tooltip contentStyle={{ fontSize: 11, border: '1px solid #E2E8F0' }} />
-                <Scatter data={scatterPoints} isAnimationActive={false}>
-                  {scatterPoints.map((p, i) => <RCell key={i} fill={MACH_COLORS[p.regime]} fillOpacity={0.6} />)}
-                </Scatter>
+                <Scatter data={scatterPoints} fill={SCATTER_COLOR} fillOpacity={0.55} isAnimationActive={false} />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
-        </div>
-        <div className="flex gap-4 mt-2 justify-center flex-wrap">
-          {Object.entries(MACH_COLORS).map(([k, c]) => (
-            <div key={k} className="flex items-center gap-1.5 text-xs text-slate-500">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: c }} />
-              {k}
-            </div>
-          ))}
         </div>
       </div>
 
