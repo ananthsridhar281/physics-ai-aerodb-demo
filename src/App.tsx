@@ -10,14 +10,12 @@ import Cell5Domino from './cells/Cell5Domino'
 import Cell6GeoTransolver from './cells/Cell6GeoTransolver'
 import Cell7Comparison from './cells/Cell7Comparison'
 import Cell8SinglePoint from './cells/Cell8SinglePoint'
-import Cell9Sweep from './cells/Cell9Sweep'
-import Cell10TrimSolver from './cells/Cell10TrimSolver'
 import Cell11ExportGNC from './cells/Cell11ExportGNC'
 import Cell12ExportStructures from './cells/Cell12ExportStructures'
 import Cell13ExportCPACS from './cells/Cell13ExportCPACS'
 import Cell14ExportSummary from './cells/Cell14ExportSummary'
 
-const TOTAL_CELLS = 14
+const TOTAL_CELLS = 12
 
 const CELLS = [
   { index: 1, title: 'Design Space Definition', description: '22 parameters, 4 groups', completion: '✅ Design space defined — 800 cases, 22 parameters', accent: '#2563EB' },
@@ -28,12 +26,10 @@ const CELLS = [
   { index: 6, title: 'GeoTransolver Training', description: '600 epochs, CL MAPE 0.9%', completion: '✅ GeoTransolver trained — 600 epochs, final loss 0.0038, CL MAPE 0.9%', accent: '#D97706' },
   { index: 7, title: 'Architecture Comparison', description: 'DoMINO vs GeoTransolver', completion: '✅ Comparison complete — GeoTransolver outperforms DoMINO on all 10 outputs', accent: '#2563EB' },
   { index: 8, title: 'Single Point Inference', description: 'Interactive sliders + force/moment table', completion: '✅ Single-point query interface ready', accent: '#2563EB' },
-  { index: 9, title: 'Parameter Sweep', description: 'CL, polar, Cm, L/D across Mach regimes', completion: '✅ Sweep complete — 5 Mach regimes × 35 alpha points', accent: '#0891B2' },
-  { index: 10, title: 'Trim Solver', description: 'Newton iteration — CL=0.50, Cm=0', completion: '✅ Trim converged — 7 iterations, residual 2.3e−8', accent: '#2563EB' },
-  { index: 11, title: 'GNC Exports', description: 'HDF5, DAVE-ML, JSBSim, State-space', completion: '✅ 4 GNC export packages ready', accent: '#2563EB' },
-  { index: 12, title: 'Aerostructures Exports', description: 'CGNS, loads, GAF, TPS', completion: '✅ 4 Aerostructures export packages ready', accent: '#D97706' },
-  { index: 13, title: 'CPACS Export', description: 'CPACS v3.4 MDO interchange', completion: '✅ CPACS export ready — schema validation passed', accent: '#059669' },
-  { index: 14, title: 'Export Summary & Provenance', description: '9 packages, full manifest', completion: '✅ 9 export packages generated — GNC (4), Aerostructures (4), MDO (1)', accent: '#059669' },
+  { index: 9, title: 'GNC Exports', description: 'HDF5, DAVE-ML, JSBSim, State-space', completion: '✅ 4 GNC export packages ready', accent: '#2563EB' },
+  { index: 10, title: 'Aerostructures Exports', description: 'CGNS, loads, GAF, TPS', completion: '✅ 4 Aerostructures export packages ready', accent: '#D97706' },
+  { index: 11, title: 'CPACS Export', description: 'CPACS v3.4 MDO interchange', completion: '✅ CPACS export ready — schema validation passed', accent: '#059669' },
+  { index: 12, title: 'Export Summary & Provenance', description: '9 packages, full manifest', completion: '✅ 9 export packages generated — GNC (4), Aerostructures (4), MDO (1)', accent: '#059669' },
 ]
 
 export default function App() {
@@ -152,12 +148,10 @@ function CellBody({ cellIndex, cellState, onRunComplete }: {
     case 6: return <Cell6GeoTransolver cellState={cellState} onRunComplete={onRunComplete} />
     case 7: return <Cell7Comparison cellState={cellState} onRunComplete={onRunComplete} />
     case 8: return <Cell8SinglePoint cellState={cellState} onRunComplete={onRunComplete} />
-    case 9: return <Cell9Sweep cellState={cellState} onRunComplete={onRunComplete} />
-    case 10: return <Cell10TrimSolver cellState={cellState} onRunComplete={onRunComplete} />
-    case 11: return <Cell11ExportGNC cellState={cellState} onRunComplete={onRunComplete} />
-    case 12: return <Cell12ExportStructures cellState={cellState} onRunComplete={onRunComplete} />
-    case 13: return <Cell13ExportCPACS cellState={cellState} onRunComplete={onRunComplete} />
-    case 14: return <Cell14ExportSummary cellState={cellState} onRunComplete={onRunComplete} />
+    case 9: return <Cell11ExportGNC cellState={cellState} onRunComplete={onRunComplete} />
+    case 10: return <Cell12ExportStructures cellState={cellState} onRunComplete={onRunComplete} />
+    case 11: return <Cell13ExportCPACS cellState={cellState} onRunComplete={onRunComplete} />
+    case 12: return <Cell14ExportSummary cellState={cellState} onRunComplete={onRunComplete} />
     default: return null
   }
 }
